@@ -86,10 +86,6 @@
         {
             "url": "https://countrymerge.pages.dev/all.txt",
             "enabled": true
-        },
-        {
-            "url": "https://wtf-359.pages.dev/wtf.txt",
-            "enabled": true
         }
     ],
     "_comment_ADDITIONAL_SOURCES": "所有数据源列表，每个对象包含 url 和 enabled。无需指定格式，程序完全自适应解析（支持标准代码、中文名、emoji国旗、JSON等）",
