@@ -108,7 +108,7 @@
 
 | GitHub Personal Access Token | Cloudflare API Token | WxPusher 微信通知 |
 | :---: | :---: | :---: |
-| **1.** 登录 GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) | **1.** 进入域名概览页，点击右侧API栏的获取您的 API 令牌 | **1.** 访问 [WxPusher 后台](http://wxpusher.zjiecode.com/admin/)，微信扫码登录 |
+| **1.** 登录 GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) | **1.** 进入域名概览页，点击右侧API栏的获取您的 API 令牌 | **1.** 访问 [WxPusher 后台](https://wxpusher.zjiecode.com/admin/)，微信扫码登录 |
 | **2.** Generate new token (classic)，Note 任意填 | **2.** 点击 创建令牌 → 选择 **编辑区域 DNS** 模板 | **2.** 左侧菜单“应用管理”→“应用信息”→“新增应用”，填写名称后创建 |
 | **3.** **Expiration 必须选 `No expiration`** | **3.** 权限已自动填好（区域 - DNS - 编辑），区域资源选择你的域名 | **3.** 复制保存 AppToken（仅显示一次） |
 | **4.** Select scopes: 仅勾选 **repo**（自动勾全） | **4.** 点击 继续以显示摘要 → 创建令牌 | **4.** 左侧“关注应用”→微信扫码关注公众号 |
@@ -310,7 +310,7 @@ python3 main.py
 | `ENABLE_WXPUSHER` | `boolean` | `true` | 是否启用微信通知 |
 | `WXPUSHER_APP_TOKEN` | `string` | `"your_app_token_here"` | **【必填】** WxPusher 的 APP_TOKEN |
 | `WXPUSHER_UIDS` | `array` | `["your_uid_here"]` | **【必填】** 接收通知的用户 UID 列表 |
-| `WXPUSHER_API_URL` | `string` | `"http://wxpusher.zjiecode.com/api/send/message"` | 消息发送 API 地址 |
+| `WXPUSHER_API_URL` | `string` | `"https://wxpusher.zjiecode.com/api/send/message"` | 消息发送 API 地址 |
 | `NOTIFY_TIMEOUT` | `int` | `3` | 微信通知 API 读取超时（秒） |
 | `NOTIFY_CONNECT_TIMEOUT` | `int` | `3` | 微信通知 API 连接超时（秒） |
 
