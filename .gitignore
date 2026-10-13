@@ -1,4 +1,16 @@
-﻿config.json
+config.json
 git_sync.ps1
 git_sync.sh
 __pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.log
