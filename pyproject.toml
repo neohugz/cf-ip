@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cfnb"
+version = "1.1.0"
+description = "Cloudflare IP 优选工具：多数据源聚合 + TCP 延迟筛选 + 可用性/HTTP 检测 + 带宽测速 + DNS 更新"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+authors = [{ name = "neohugz" }]
+keywords = ["cloudflare", "cdn", "ip-optimizer", "speedtest", "dns"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet",
+    "Topic :: System :: Networking",
+]
+dependencies = ["requests>=2.25"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "ruff>=0.5"]
+
+[tool.setuptools]
+py-modules = ["main"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 200
+target-version = "py38"
+
+[tool.ruff.lint]
+# 只启用能抓真实缺陷的规则，避免刷屏式风格改动
+select = ["F", "E9"]
