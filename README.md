@@ -246,6 +246,53 @@ python3 main.py
 
 ---
 
+## 🧰 命令行参数
+
+`main.py` 支持常用命令行参数，方便放进计划任务、或在部署后先做配置自检：
+
+| 参数 | 说明 |
+| :--- | :--- |
+| `-c, --config PATH` | 指定配置文件路径（默认：脚本目录或当前目录下的 `config.json`） |
+| `-o, --output PATH` | 覆盖配置里的 `OUTPUT_FILE`，写入选优结果 |
+| `--dry-run` | 只筛选并写出结果文件，跳过 Cloudflare DNS 更新与 GitHub 同步 |
+| `--no-notify` | 本次运行禁用微信通知 |
+| `--json` | 运行统计以 JSON 输出到标准输出，进度信息转到标准错误，方便 `\| jq` 或接监控 |
+| `--check-config` | 只校验配置并退出（退出码 `0` 正常、`2` 配置错误） |
+| `--strict` | 没有选出任何节点时以退出码 `1` 结束，便于定时任务告警 |
+| `--version` | 打印版本号 |
+
+```bash
+# 部署后先自检配置
+python3 main.py --check-config
+
+# 试运行：只筛选 + 写 ip.txt，不碰 DNS 和 GitHub
+python3 main.py --dry-run --no-notify
+
+# 定时任务里采集统计
+python3 main.py --json 2>/dev/null | jq '.final_count, .degraded'
+```
+
+退出码：`0`＝正常结束（包括「没有节点通过筛选」这类正常情况）；`1`＝没有任何可用节点，或 `--strict` 下没有选出节点；`2`＝配置错误。
+
+`--json` 输出字段：`nodes_total`、`tcp_passed`、`candidates`、`availability_passed`、`http_passed`、`bandwidth_measured`、`final_count`、`final_nodes`、`output_file`、`dns`、`github_synced`、`degraded`、`sources`、`exit_code`、`version`。
+
+> [!NOTE]
+> 结果文件与日志文件的**相对路径按配置文件所在目录解析**。即使由计划任务 / cron 从别的工作目录启动，`ip.txt` 也会写在仓库目录里，`git_sync.sh` 推送的是同一份文件。
+
+---
+
+## 🧪 本地测试
+
+```bash
+pip install -e ".[dev]"   # 或 pip install pytest ruff
+python -m pytest          # 全部离线运行，不访问网络、不调用 curl、不改动 Cloudflare
+ruff check .              # 只启用 F / E9（抓真实缺陷，不做风格刷屏）
+```
+
+测试里的 requests、socket、subprocess、时钟全部是替身，所以在没有网络、没装 curl 的机器上也能跑。
+
+---
+
 ## ⚙️ 配置说明（完整参数详解）
 
 > [!NOTE]
